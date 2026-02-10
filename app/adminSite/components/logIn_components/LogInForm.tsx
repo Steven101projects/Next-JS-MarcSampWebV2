@@ -3,8 +3,22 @@
 import { useState } from "react"
 import Link from "next/link"
 
-export default function LogInForm() {
+type LogInFormProps = {
+  onLogin: () => void
+}
+
+export default function LogInForm({ onLogin }: LogInFormProps) {
   const [showPassword, setShowPassword] = useState(false)
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    // simulate successful login
+    document.cookie = "isLoggedIn=true; path=/"
+
+    // tell parent component login succeeded
+    onLogin()
+  }
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900 px-4 text-white">
@@ -20,7 +34,7 @@ export default function LogInForm() {
             </p>
           </div>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
               <label className="mb-2 block text-sm font-semibold text-white/80">
                 Email
@@ -30,6 +44,7 @@ export default function LogInForm() {
                 placeholder="you@example.com"
                 className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-white/30 focus:border-lime-400/60 focus:ring-2 focus:ring-lime-400/20"
                 autoComplete="email"
+                required
               />
             </div>
 
@@ -44,6 +59,7 @@ export default function LogInForm() {
                   placeholder="Enter your password"
                   className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 pr-12 text-white outline-none placeholder:text-white/30 focus:border-lime-400/60 focus:ring-2 focus:ring-lime-400/20"
                   autoComplete="current-password"
+                  required
                 />
 
                 <button

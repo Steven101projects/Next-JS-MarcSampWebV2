@@ -9,7 +9,7 @@ export default function MainHeader() {
 
   return (
     <header
-      className="absolute top-0 z-52 w-full bg-gradient-to-bl from-yellow-500/50 to-green-400/50 "
+      className="w-full bg-gradient-to-bl from-yellow-500 to-green-700"
     >
       <div className="flex h-24 items-center justify-between px-4 sm:px-6 lg:justify-center">
         {/* Logo */}
@@ -107,7 +107,7 @@ function CTA({ full = false }: { full?: boolean }) {
       hover:scale-105
       ${full ? "h-14 w-full my-5" : "h-full px-8 py-4 m-10"}`}
     >
-      Log In
+      Edit Contents
     </a>
   )
 }
