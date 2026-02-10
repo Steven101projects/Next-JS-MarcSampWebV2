@@ -16,7 +16,7 @@ export default function BannerPage() {
           <div className="max-w-prose text-left text-white">
             <h1 className="text-4xl font-bold sm:text-5xl">
               Understand user flow and
-              <strong className="text-indigo-300"> increase </strong>
+              <strong className="text-lime-300"> increase </strong>
               conversions
             </h1>
 
@@ -27,7 +27,7 @@ export default function BannerPage() {
             <div className="mt-6 flex gap-4">
               <a
                 href="#"
-                className="rounded bg-indigo-600 px-5 py-3 font-medium text-white hover:bg-indigo-700"
+                className="rounded bg-green-600 px-5 py-3 font-medium text-white hover:bg-lime-500"
               >
                 Get Started
               </a>

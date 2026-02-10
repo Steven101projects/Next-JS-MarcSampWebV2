@@ -1,165 +1,110 @@
-
-
+import Image from "next/image"
 
 
 
 export default function BookAppointment() {
   return (
-    <section className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-      <div className="rounded-xl bg-layer p-4 shadow-xs sm:p-7">
-        <form>
-          {/* Section */}
-          <div className="grid gap-2 border-t border-layer-line py-8 first:border-transparent sm:grid-cols-12 sm:gap-4">
-            <div className="sm:col-span-12">
-              <h2 className="text-lg font-semibold text-foreground">
-                Book an appointment
-              </h2>
-            </div>
+    <section className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="full-name"
-                className="mt-2.5 inline-block text-sm font-medium text-muted-foreground-1"
-              >
-                Full name
-              </label>
-            </div>
+      {/* Card */}
+      <div className="rounded-3xl border border-black/10 bg-white/80 p-6 backdrop-blur-md shadow-xl sm:p-10">
+      
 
-            <div className="sm:col-span-9">
-              <div className="sm:flex">
-                <input
-                  id="full-name"
-                  type="text"
-                  placeholder="First name"
-                  className="relative -mt-px -ms-px block w-full bg-layer px-3 py-1.5 text-foreground shadow-2xs placeholder:text-muted-foreground-1 focus:z-10 focus:border-primary-focus focus:ring-primary-focus sm:mt-0 sm:rounded-s-lg sm:py-2 sm:text-sm"
-                />
-                <input
-                  type="text"
-                  placeholder="Last name"
-                  className="relative -mt-px -ms-px block w-full bg-layer px-3 py-1.5 text-foreground shadow-2xs placeholder:text-muted-foreground-1 focus:z-10 focus:border-primary-focus focus:ring-primary-focus sm:mt-0 sm:rounded-e-lg sm:py-2 sm:text-sm"
-                />
-              </div>
-            </div>
+        {/* Header */}
+        <div className="mb-10 text-center">
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            Book an appointment
+          </h1>
+          
+          <p className="mt-3 text-gray-600">
+            Tell us a bit about yourself and what you would like to discuss
+          </p>
+        </div>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="email"
-                className="mt-2.5 inline-block text-sm font-medium text-muted-foreground-1"
-              >
-                Email
-              </label>
-            </div>
+        <form className="space-y-12">
 
-            <div className="sm:col-span-9">
+          {/* Personal info */}
+          <div>
+            <h2 className="mb-6 text-lg font-semibold text-gray-900">
+              Your information
+            </h2>
+
+            <div className="grid gap-6 sm:grid-cols-2">
               <input
-                id="email"
-                type="email"
-                className="block w-full rounded-lg bg-layer px-3 py-1.5 text-foreground shadow-2xs placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus sm:py-2 sm:text-sm"
+                type="text"
+                placeholder="First name"
+                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
+              />
+              <input
+                type="text"
+                placeholder="Last name"
+                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
               />
             </div>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="phone"
-                className="mt-2.5 inline-block text-sm font-medium text-muted-foreground-1"
-              >
-                Phone
-              </label>
-            </div>
-
-            <div className="sm:col-span-9">
+            <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <input
-                id="phone"
-                type="text"
-                className="block w-full rounded-lg bg-layer px-3 py-1.5 text-foreground shadow-2xs placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus sm:py-2 sm:text-sm"
+                type="email"
+                placeholder="Email address"
+                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
+              />
+              <input
+                type="tel"
+                placeholder="Phone number"
+                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
               />
             </div>
           </div>
 
-          {/* Appointment Details */}
-          <div className="grid gap-2 border-t border-layer-line py-8 sm:grid-cols-12 sm:gap-4">
-            <div className="sm:col-span-12">
-              <h2 className="text-lg font-semibold text-foreground">
-                Appointment details
-              </h2>
-            </div>
+          {/* Appointment details */}
+          <div>
+            <h2 className="mb-6 text-lg font-semibold text-gray-900">
+              Appointment details
+            </h2>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="date"
-                className="mt-2.5 inline-block text-sm font-medium text-muted-foreground-1"
-              >
-                Preferred date
-              </label>
-            </div>
-
-            <div className="sm:col-span-9">
+            <div className="grid gap-6 sm:grid-cols-2">
               <input
-                id="date"
                 type="date"
-                className="block w-full rounded-lg bg-layer px-3 py-1.5 text-foreground shadow-2xs focus:border-primary-focus focus:ring-primary-focus sm:py-2 sm:text-sm"
+                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
               />
-            </div>
-
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="time"
-                className="mt-2.5 inline-block text-sm font-medium text-muted-foreground-1"
-              >
-                Preferred time
-              </label>
-            </div>
-
-            <div className="sm:col-span-9">
               <input
-                id="time"
                 type="time"
-                className="block w-full rounded-lg bg-layer px-3 py-1.5 text-foreground shadow-2xs focus:border-primary-focus focus:ring-primary-focus sm:py-2 sm:text-sm"
+                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
               />
             </div>
 
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="notes"
-                className="mt-2.5 inline-block text-sm font-medium text-muted-foreground-1"
-              >
-                Notes
-              </label>
-            </div>
-
-            <div className="sm:col-span-9">
-              <textarea
-                id="notes"
-                rows={5}
-                placeholder="Tell us what you'd like to discuss"
-                className="block w-full rounded-lg bg-layer px-3 py-1.5 text-foreground shadow-2xs placeholder:text-muted-foreground-1 focus:border-primary-focus focus:ring-primary-focus sm:py-2 sm:text-sm"
-              />
-            </div>
+            <textarea
+              rows={5}
+              placeholder="Tell us what you would like to discuss"
+              className="mt-6 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
+            />
           </div>
 
           {/* Consent */}
-          <div className="border-t border-layer-line py-8">
-            <div className="flex items-center">
-              <input
-                id="consent"
-                type="checkbox"
-                className="size-4 rounded-sm border-line-3 text-primary focus:ring-0"
-              />
-              <label
-                htmlFor="consent"
-                className="ms-2 text-sm text-muted-foreground-1"
-              >
-                I agree to be contacted regarding my appointment.
-              </label>
-            </div>
+          <div className="flex items-start gap-3 rounded-xl bg-gray-50 p-4">
+            <input
+              type="checkbox"
+              className="mt-1 h-4 w-4 rounded border-black/20 text-green-600"
+            />
+            <p className="text-sm text-gray-600">
+              I agree to be contacted regarding my appointment
+            </p>
           </div>
 
-          <button
-            type="submit"
-            className="inline-flex w-full items-center justify-center gap-x-2 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground hover:bg-primary-hover focus:bg-primary-focus"
-          >
-            Book appointment
-          </button>
+          {/* Action */}
+          <div className="pt-4">
+            <button
+              type="submit"
+              className="w-full rounded-2xl bg-gradient-to-b from-green-600 to-lime-500 py-4 text-lg font-bold text-white shadow-lg transition hover:scale-[1.02]"
+            >
+              Confirm appointment
+            </button>
+
+            <p className="mt-4 text-center text-sm text-gray-500">
+              We will confirm your appointment by email
+            </p>
+          </div>
+
         </form>
       </div>
     </section>
