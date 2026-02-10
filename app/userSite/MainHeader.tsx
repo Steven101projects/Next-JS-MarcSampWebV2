@@ -118,9 +118,9 @@ function CTA({ full = false }: { full?: boolean }) {
       href="/appointment"
       className={`flex items-center justify-center text-xl font-bold text-white transition 
       bg-gradient-to-b from-green-600 to-lime-500
-      rounded-xl hover:border-2 border-white
+      rounded-2xl hover:border-2 border-white
       hover:scale-105
-      ${full ? "h-14 w-full my-5" : "h-full px-8 py-4 m-10"}`}
+      ${full ? "h-14 w-full my-5" : "h-full px-8 py-6 m-10"}`}
     >
       Book an Appointment
     </a>

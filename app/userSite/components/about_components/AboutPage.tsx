@@ -47,7 +47,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-5xl px-4 py-14 lg:py-20">
 
           {/* Title glass */}
-          <div className="mb-14 max-w-8xl flex flex-col items-center rounded-2xl border-2 border-gray-200 bg-gradient-to-b from-lime-500/80 to-green-500/80 px-8 py-8 backdrop-blur-md shadow-lg shadow-lime-500/10">
+          <div className="mb-14 max-w-8xl flex flex-col items-center rounded-2xl border-2 border-gray-200 bg-gradient-to-b from-green-500/80 to-lime-400/80 px-8 py-8 backdrop-blur-md shadow-lg shadow-lime-500/10">
             <h2 className="text-2xl font-extrabold text-white md:text-6xl">
               Our approach
             </h2>
@@ -70,7 +70,7 @@ export default function AboutPage() {
             </div>
 
             {/* Timeline glass */}
-            <div className="rounded-2xl border border-white/25 bg-green-500 px-6 py-8 backdrop-blur-md shadow-lg shadow-green-500/10">
+            <div className="rounded-2xl border border-white/25 bg-gradient-to-br from-lime-500 to-green-700 px-6 py-8 backdrop-blur-md shadow-lg shadow-green-500/10">
 
               <h3 className="mb-6 text-xs font-semibold uppercase tracking-wide text-white/80">
                 Our process

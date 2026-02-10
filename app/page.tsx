@@ -6,6 +6,7 @@ import MainFooter from "./userSite/MainFooter";
 import AboutPage from "./userSite/components/about_components/AboutPage";
 import ServicesPage from "./userSite/components/service_components/ServicesPage";
 import ContactPage from "./userSite/components/contact_components/ContactPage";
+import FeaturesPage from "./userSite/components/more-info-components/Features";
 
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
 <BannerPage />
 <ServicesPage />
 <AboutPage />
+<FeaturesPage />
 <ContactPage />
 
 

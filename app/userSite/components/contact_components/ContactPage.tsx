@@ -50,11 +50,17 @@ const contactItems = [
 
 export default function ContactPage() {
   return (
-    <main className="relative h-1/2 overflow-hidden bg-gradient-to-br from-lime-500 to-green-300 text-gray-900">
+    <main className="relative h-1/2 overflow-hidde  bg-gradient-to-b from-green-500 to-lime-300 text-gray-900">
 
       {/* Texture or glow layer optional */}
-      <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(132,204,22,0.25),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(250,204,21,0.25),transparent_40%)]" />
-
+      {/* Texture overlay */}
+      <div
+        className="absolute inset-0 opacity-90 mix-blend-overlay pointer-events-none"
+        style={{
+          backgroundImage: "url('/service-texture3.png')",
+          backgroundRepeat: "repeat"
+        }}
+      />
       {/* Header */}
       <section className="relative px-4 pt-28 text-center sm:pt-32">
         <div className="mx-auto max-w-4xl rounded-2xl px-8 py-10 backdrop-blur-md shadow-lg shadow-lime-500/10">
