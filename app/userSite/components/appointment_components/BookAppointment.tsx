@@ -1,110 +1,168 @@
-import Image from "next/image"
+"use client"
 
-
+import { useState } from "react"
 
 export default function BookAppointment() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    date: "",
+    time: "",
+    message: "",
+    consent: false,
+  })
+
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value, type } = e.target
+
+    if (type === "checkbox") {
+      setFormData(prev => ({
+        ...prev,
+        consent: (e.target as HTMLInputElement).checked,
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+      }))
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+
+    if (!formData.consent) {
+      setError("You must agree before submitting.")
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      const res = await fetch("/api/appointments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        throw new Error("Failed to book appointment")
+      }
+
+      setSuccess(true)
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        date: "",
+        time: "",
+        message: "",
+        consent: false,
+      })
+    } catch {
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (success) {
+    return (
+      <div className="p-20 text-center">
+        <h2 className="text-3xl font-bold text-green-600">
+          Appointment Confirmed
+        </h2>
+        <p className="mt-4 text-gray-600">
+          We will contact you shortly.
+        </p>
+      </div>
+    )
+  }
+
   return (
-    <section className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+    <section className="relative mx-auto max-w-5xl px-4 py-16">
+      <div className="rounded-3xl border border-black/10 bg-white/80 p-6 shadow-xl sm:p-10">
 
-      {/* Card */}
-      <div className="rounded-3xl border border-black/10 bg-white/80 p-6 backdrop-blur-md shadow-xl sm:p-10">
-      
-
-        {/* Header */}
         <div className="mb-10 text-center">
           <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
             Book an appointment
           </h1>
-          
           <p className="mt-3 text-gray-600">
             Tell us a bit about yourself and what you would like to discuss
           </p>
         </div>
 
-        <form className="space-y-12">
+        <form className="space-y-12" onSubmit={handleSubmit}>
 
-          {/* Personal info */}
           <div>
             <h2 className="mb-6 text-lg font-semibold text-gray-900">
               Your information
             </h2>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <input
-                type="text"
-                placeholder="First name"
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
-              />
-              <input
-                type="text"
-                placeholder="Last name"
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
-              />
+              <input name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First name" className="input" />
+              <input name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last name" className="input" />
             </div>
 
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
-              />
-              <input
-                type="tel"
-                placeholder="Phone number"
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
-              />
+              <input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="Email address" className="input" />
+              <input name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="Phone number" className="input" />
             </div>
           </div>
 
-          {/* Appointment details */}
           <div>
             <h2 className="mb-6 text-lg font-semibold text-gray-900">
               Appointment details
             </h2>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <input
-                type="date"
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
-              />
-              <input
-                type="time"
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
-              />
+              <input name="date" type="date" value={formData.date} onChange={handleChange} className="input" />
+              <input name="time" type="time" value={formData.time} onChange={handleChange} className="input" />
             </div>
 
             <textarea
+              name="message"
               rows={5}
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Tell us what you would like to discuss"
-              className="mt-6 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-gray-900 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200"
+              className="mt-6 input"
             />
           </div>
 
-          {/* Consent */}
           <div className="flex items-start gap-3 rounded-xl bg-gray-50 p-4">
             <input
               type="checkbox"
-              className="mt-1 h-4 w-4 rounded border-black/20 text-green-600"
+              checked={formData.consent}
+              onChange={handleChange}
+              className="mt-1 h-4 w-4"
             />
             <p className="text-sm text-gray-600">
               I agree to be contacted regarding my appointment
             </p>
           </div>
 
-          {/* Action */}
-          <div className="pt-4">
-            <button
-              type="submit"
-              className="w-full rounded-2xl bg-gradient-to-b from-green-600 to-lime-500 py-4 text-lg font-bold text-white shadow-lg transition hover:scale-[1.02]"
-            >
-              Confirm appointment
-            </button>
+          {error && <p className="text-red-500">{error}</p>}
 
-            <p className="mt-4 text-center text-sm text-gray-500">
-              We will confirm your appointment by email
-            </p>
-          </div>
-
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-2xl bg-gradient-to-b from-green-600 to-lime-500 py-4 text-lg font-bold text-white shadow-lg"
+          >
+            {loading ? "Submitting..." : "Confirm appointment"}
+          </button>
         </form>
       </div>
     </section>

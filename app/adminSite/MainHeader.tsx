@@ -1,18 +1,25 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
+import Link from "next/link"
 
-export default function MainHeader() {
+type MainHeaderProps = {
+  setActiveView: (view: string) => void
+}
+
+export default function MainHeader({ setActiveView }: MainHeaderProps) {
   const [open, setOpen] = useState(false)
 
+  function handleClick(view: string) {
+    setActiveView(view)
+    setOpen(false)
+  }
+
   return (
-    <header
-      className="w-full bg-gradient-to-bl from-yellow-500 to-green-700"
-    >
+    <header className="w-full bg-gradient-to-bl from-yellow-500 to-green-700">
       <div className="flex h-24 items-center justify-between px-4 sm:px-6 lg:justify-center">
-        {/* Logo */}
+        
 <Link href="/">
   <Image
     src="/logoipsum-tempLight.svg"
@@ -26,45 +33,31 @@ export default function MainHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center lg:flex">
-          <NavItem text="Dashboard" />
-          <NavItem text="Settings" />
-          <NavItem text="Messages" />
-          <CTA />
+          <NavItem text="Dashboard" onClick={() => handleClick("dashboard")} />
+          <NavItem text="Settings" onClick={() => handleClick("settings")} />
+          <NavItem text="Messages" onClick={() => handleClick("messages")} />
+          <CTA onClick={() => handleClick("edit")} />
         </nav>
 
         {/* Burger */}
         <button
           onClick={() => setOpen(!open)}
-          className="relative z-60 flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
+          className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
-          <span
-            className={`h-0.5 w-6 bg-white transition ${
-              open ? "translate-y-2 rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`h-0.5 w-6 bg-white transition ${
-              open ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`h-0.5 w-6 bg-white transition ${
-              open ? "-translate-y-2 -rotate-45" : ""
-            }`}
-          />
+          <span className={`h-0.5 w-6 bg-white transition ${open ? "translate-y-2 rotate-45" : ""}`} />
+          <span className={`h-0.5 w-6 bg-white transition ${open ? "opacity-0" : ""}`} />
+          <span className={`h-0.5 w-6 bg-white transition ${open ? "-translate-y-2 -rotate-45" : ""}`} />
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div
-          className="flex flex-col bg-gradient-to-b from-yellow-500/60 to-green-700/60 backdrop-blur-sm lg:hidden"
-        >
-          <MobileNavItem text="Dashboard" />
-          <MobileNavItem text="Settings" />
-          <MobileNavItem text="Messages" />
+        <div className="flex flex-col bg-gradient-to-b from-yellow-500/60 to-green-700/60 backdrop-blur-sm lg:hidden">
+          <MobileNavItem text="Dashboard" onClick={() => handleClick("dashboard")} />
+          <MobileNavItem text="Settings" onClick={() => handleClick("settings")} />
+          <MobileNavItem text="Messages" onClick={() => handleClick("messages")} />
           <div className="px-10">
-            <CTA full />
+            <CTA full onClick={() => handleClick("edit")} />
           </div>
         </div>
       )}
@@ -72,35 +65,35 @@ export default function MainHeader() {
   )
 }
 
-/* Desktop item */
-function NavItem({ text }: { text: string }) {
+/* Desktop nav item */
+function NavItem({ text, onClick }: { text: string; onClick: () => void }) {
   return (
-    <a
-      href="/services"
+    <button
+      onClick={onClick}
       className="flex h-24 items-center px-16 text-lg font-bold text-white transition hover:bg-gradient-to-b from-yellow-200/30 to-green-500/30"
     >
       {text}
-    </a>
+    </button>
   )
 }
 
-/* Mobile item */
-function MobileNavItem({ text }: { text: string }) {
+/* Mobile nav item */
+function MobileNavItem({ text, onClick }: { text: string; onClick: () => void }) {
   return (
-    <a
-      href="#"
-      className="px-4 py-4 text-lg font-bold text-white transition  hover:bg-gradient-to-b from-yellow-200/30 to-green-500/30"
+    <button
+      onClick={onClick}
+      className="px-4 py-4 text-lg font-bold text-white transition hover:bg-gradient-to-b from-yellow-200/30 to-green-500/30"
     >
       {text}
-    </a>
+    </button>
   )
 }
 
-/* Call to action */
-function CTA({ full = false }: { full?: boolean }) {
+/* CTA button */
+function CTA({ full = false, onClick }: { full?: boolean; onClick: () => void }) {
   return (
-    <a
-      href="/appointment"
+    <button
+      onClick={onClick}
       className={`flex items-center justify-center text-xl font-bold text-white transition 
       bg-gradient-to-b from-green-600 to-lime-500
       rounded-xl hover:border-2 border-white
@@ -108,6 +101,6 @@ function CTA({ full = false }: { full?: boolean }) {
       ${full ? "h-14 w-full my-5" : "h-full px-8 py-4 m-10"}`}
     >
       Edit Contents
-    </a>
+    </button>
   )
 }

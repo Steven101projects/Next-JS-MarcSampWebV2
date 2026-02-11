@@ -49,7 +49,7 @@ export default function FeaturesPage() {
   return (
     <div id="features" className="relative overflow-hidden">
       {/* Base gradient */}
-      <div className="absolute inset-0  bg-green-500 dark:from-green-950 dark:via-green-900 dark:to-lime-900" />
+      <div className="absolute inset-0  bg-gradient-to-b from-lime-400 to-green-500 dark:from-green-950 dark:via-green-900 dark:to-lime-900" />
 
       {/* Radial highlights */}
       <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,rgba(132,204,22,0.35),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(250,204,21,0.35),transparent_40%)]" />
