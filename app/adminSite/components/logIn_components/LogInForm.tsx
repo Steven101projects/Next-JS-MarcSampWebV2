@@ -1,9 +1,12 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 
 export default function LogInForm() {
+  const router = useRouter()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
@@ -36,8 +39,9 @@ export default function LogInForm() {
         return
       }
 
-      // Important: reload so /api/me runs again
-      window.location.reload()
+      // Redirect to dashboard
+      router.push("/dashboard")
+
     } catch {
       setError("Something went wrong. Please try again.")
       setLoading(false)
@@ -67,7 +71,7 @@ export default function LogInForm() {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none"
+                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:ring-2 focus:ring-lime-500/40"
                 required
               />
             </div>
@@ -83,14 +87,14 @@ export default function LogInForm() {
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 pr-12 text-white outline-none"
+                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-lime-500/40"
                   required
                 />
 
                 <button
                   type="button"
                   onClick={() => setShowPassword(v => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-xl px-3 py-1 text-xs font-bold text-white/70"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-xl px-3 py-1 text-xs font-bold text-white/70 hover:text-white"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -106,7 +110,7 @@ export default function LogInForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-2xl bg-gradient-to-b from-lime-500 to-green-600 py-3 text-base font-extrabold text-white"
+              className="w-full rounded-2xl bg-gradient-to-b from-lime-500 to-green-600 py-3 text-base font-extrabold text-white transition hover:scale-105 disabled:opacity-60"
             >
               {loading ? "Logging in..." : "Log in"}
             </button>

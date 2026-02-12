@@ -1,28 +1,27 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import { jwtVerify } from "jose"
+import clientPromise from "@/lib/mongodb"
+import { verifyAdminFromRequest } from "@/lib/authGuard"
+
 
 export async function middleware(req: NextRequest) {
-  const token = req.cookies.get("token")?.value
+  const { pathname } = req.nextUrl
 
-  if (!token) {
-    return NextResponse.redirect(new URL("/login", req.url))
-  }
+  if (pathname.startsWith("/dashboard")) {
+    const isAdmin = await verifyAdminFromRequest(req)
 
-  try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET!)
-    const { payload } = await jwtVerify(token, secret)
-
-    if (payload.role !== "admin") {
-      return NextResponse.redirect(new URL("/login", req.url))
+    if (!isAdmin) {
+      return NextResponse.redirect(new URL("/marCrisAdmin", req.url))
     }
-
-    return NextResponse.next()
-  } catch {
-    return NextResponse.redirect(new URL("/login", req.url))
   }
-}
 
-export const config = {
-  matcher: ["/admin/:path*"],
+  if (pathname.startsWith("/api/admin")) {
+    const isAdmin = await verifyAdminFromRequest(req)
+
+    if (!isAdmin) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+  }
+
+  return NextResponse.next()
 }
