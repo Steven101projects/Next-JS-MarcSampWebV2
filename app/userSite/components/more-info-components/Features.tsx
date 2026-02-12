@@ -66,7 +66,7 @@ export default function FeaturesPage() {
 
 <div className="flex justify-center">
   {/* Features Section */}
-        <section className="mt-10 mb-24 w-2/3 bg-green-500/60 rounded-2xl px-4 py-20 backdrop-blur dark:bg-gray-900/90 sm:px-6 lg:px-10">
+        <section className="mt-10 mb-24 w-2/3 bg-gradient-to-b from-green-500 to-green-600 rounded-2xl px-4 py-20 backdrop-blur dark:bg-gray-900/90 sm:px-6 lg:px-10">
           <div className="mx-auto max-w-x5l text-center">
             <h2 className="text-6xl font-extrabold text-white dark:text-white sm:text-5xl">
               All the features you want

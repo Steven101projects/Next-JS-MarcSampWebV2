@@ -4,17 +4,25 @@ import clientPromise from "@/lib/mongodb"
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
-  const body = await req.json()
+  try {
+    const { id } = await context.params
+    const body = await req.json()
 
-  const client = await clientPromise
-  const db = client.db("clientWebsite")
+    const client = await clientPromise
+    const db = client.db("marCrisWebsite")
 
-  await db.collection("appointments").updateOne(
-    { _id: new ObjectId(params.id) },
-    { $set: { status: body.status } }
-  )
+    await db.collection("appointments").updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { status: body.status } }
+    )
 
-  return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to update appointment" },
+      { status: 500 }
+    )
+  }
 }
